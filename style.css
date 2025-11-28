@@ -134,8 +134,14 @@ body {
 }
 
 .hidden {
-    display: none;
+    /* 保持元素佔據空間，防止其他物件移動 */
+    visibility: hidden; 
+    
+    /* 確保在隱藏時無法被點擊或選中 */
+    pointer-events: none; 
 }
+
+
 
 #reset-button {
     padding: 10px 20px;
@@ -168,4 +174,28 @@ body {
 .card.matched .card-back {
     /* 确保背面不可见 */
     backface-visibility: hidden; 
+}
+
+
+/* style.css */
+
+/* 1. 定义动画效果：脉冲发光 */
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #4CAF50; /* 默认绿色阴影 */
+    }
+    50% {
+        transform: scale(1.05); /* 稍微放大 */
+        box-shadow: 0 0 20px 5px #ffeb3b; /* 亮黄色强光 */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #4CAF50;
+    }
+}
+
+/* 2. 定义触发动画的类 */
+.card.matched.animate .card-inner {
+    animation: pulse-glow 0.5s ease-out; /* 持续 0.5 秒的动画 */
 }

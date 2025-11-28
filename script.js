@@ -196,16 +196,34 @@ function checkForMatch() {
 }
 
 
+
+// script.js (替换 disableCards 函数)
+
 function disableCards(card1, card2) {
-    // 标记为已配对，并移除点击事件
+    // 1. 标记为已配对，并移除点击事件
     card1.classList.add('matched');
     card2.classList.add('matched');
     card1.removeEventListener('click', flipCard);
     card2.removeEventListener('click', flipCard);
 
+    // -----------------------------------------------------
+    // 【新增特效逻辑】
+    // 2. 触发特效动画
+    card1.classList.add('animate'); 
+    card2.classList.add('animate');
+
+    // 3. 延迟后移除动画类（动画持续 500ms，所以我们设置 500ms 后移除）
+    setTimeout(() => {
+        card1.classList.remove('animate');
+        card2.classList.remove('animate');
+    }, 500); 
+    // -----------------------------------------------------
+
     // 重置状态以进行下一轮
     resetBoard();
 }
+
+
 
 function unflipCards(card1, card2) {
     // 延迟 1 秒后翻回
